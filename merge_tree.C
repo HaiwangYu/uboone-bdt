@@ -6,6 +6,7 @@
 #include <vector>
 
 void merge_tree(
+        const float event_type_in = 30,
         const char* input = "WCP_selection.root",
         const char* output = "bdt.root"
         ) {
@@ -64,7 +65,7 @@ void merge_tree(
     // 1st digit: run #
     // 2nd digit: 0: intrinsic nue, 1: intrinsic nue lowE, 2: bnb nu, 3: bnb nu lowE, 4: ext bnb, 5 dirt
     // e.g. run3_intrinsic_nue: 30
-    Float_t event_type = 30;
+    Float_t event_type = event_type_in;
     brs.push_back(bdt->Branch("event_type", &event_type, "event_type/F"));
 
     for(Long64_t ientry=0; ientry<bdt->GetEntries(); ++ientry) {
