@@ -61,6 +61,12 @@ void merge_tree(
     brs.push_back(bdt->Branch("weight_lee", &weight_lee, "weight_lee/F"));
     brs.push_back(bdt->Branch("kine_reco_Enu", &kine_reco_Enu, "kine_reco_Enu/F"));
 
+    // 1st digit: run #
+    // 2nd digit: 0: intrinsic nue, 1: intrinsic nue lowE, 2: bnb nu, 3: bnb nu lowE, 4: ext bnb, 5 dirt
+    // e.g. run3_intrinsic_nue: 30
+    Float_t event_type = 30;
+    brs.push_back(bdt->Branch("event_type", &event_type, "event_type/F"));
+
     for(Long64_t ientry=0; ientry<bdt->GetEntries(); ++ientry) {
         T_eval->GetEntry(ientry);
         T_KINEvars->GetEntry(ientry);
