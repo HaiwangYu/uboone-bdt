@@ -6,10 +6,6 @@
 
 [WCP + larsoft port module Data Production](https://docs.google.com/document/d/1Cr-QVRa4Js4jDhgpZDS-Nmt8R4mkRXrA_q8kSOZodcM/edit)
 
-
-
-
-
 ## Finding samples
 
 [MCC9.1 WCP reco1.5 Samples](https://microboone-exp.fnal.gov/at_work/AnalysisTools/mc/mcc9.0/details_wcp_v28.html)
@@ -82,7 +78,10 @@ run_WCPcheckout.fcl
 SaveLeeWieghts: false
 ```
 
+### Careful!!!
 
+- need to check if `br_filled==1`
+- 
 
 ### Merge banches from two trees
 
@@ -90,9 +89,9 @@ https://root-forum.cern.ch/t/merging-branches-from-two-tfiles-into-one-tree/2173
 
 https://root-forum.cern.ch/t/how-to-merge-two-root-files-with-different-branches-togher/14260
 
-### run3_intrinsic_nue
+### 2020-09-07 log
 
-part1: 1-1700
+run3_intrinsic_nue part1:
 
 ```bash
 $jobsub_q --user yuhw
@@ -101,9 +100,7 @@ JOBSUBJOBID                           OWNER           SUBMITTED     RUN_TIME   S
 11966436.1639@jobsub03.fnal.gov       yuhw            09/04 20:56   0+00:54:31 H   0   1.5 port2-run3_intrinsic_nue-v08_00_00_42.sh_20200904_205616_2941473_0_1_wrap.sh
 ```
 
-
-
-part2 and run1_intrinsic_nue_LowE
+run3_intrinsic_nue part2 and run1_intrinsic_nue_LowE
 
 ```bash
 $jobsub_q --user yuhw
@@ -113,5 +110,36 @@ JOBSUBJOBID                           OWNER           SUBMITTED     RUN_TIME   S
 36363131.782@jobsub01.fnal.gov        yuhw            09/06 12:19   0+01:55:12 H   0   3.2 port2-run3_intrinsic_nue_part2-v08_00_00_42.sh_20200906_121912_1548818_0_1_wrap.sh 
 36363131.891@jobsub01.fnal.gov        yuhw            09/06 12:19   0+02:37:15 H   0   3.9 port2-run3_intrinsic_nue_part2-v08_00_00_42.sh_20200906_121912_1548818_0_1_wrap.sh 
 36363131.1344@jobsub01.fnal.gov       yuhw            09/06 12:19   0+01:04:43 H   0   3.9 port2-run3_intrinsic_nue_part2-v08_00_00_42.sh_20200906_121912_1548818_0_1_wrap.sh
+```
+
+run1_intrinsic_nue part1
+
+```bash
+$jobsub_q --user yuhw
+JOBSUBJOBID                           OWNER           SUBMITTED     RUN_TIME   ST PRI SIZE CMD
+36644692.168@jobsub02.fnal.gov        yuhw            09/07 12:14   0+01:16:00 H   0   3.9 port2-run1_intrinsic_nue_part1-v08_00_00_42.sh_20200907_121417_664310_0_1_wrap.sh 
+36644692.363@jobsub02.fnal.gov        yuhw            09/07 12:14   0+00:22:11 H   0   3.7 port2-run1_intrinsic_nue_part1-v08_00_00_42.sh_20200907_121417_664310_0_1_wrap.sh 
+36644692.391@jobsub02.fnal.gov        yuhw            09/07 12:14   0+02:24:53 H   0   3.9 port2-run1_intrinsic_nue_part1-v08_00_00_42.sh_20200907_121417_664310_0_1_wrap.sh 
+36644692.402@jobsub02.fnal.gov        yuhw            09/07 12:14   0+01:11:37 H   0   3.7 port2-run1_intrinsic_nue_part1-v08_00_00_42.sh_20200907_121417_664310_0_1_wrap.sh 
+36644692.569@jobsub02.fnal.gov        yuhw            09/07 12:14   0+05:33:07 R   0   1.7 port2-run1_intrinsic_nue_part1-v08_00_00_42.sh_20200907_121417_664310_0_1_wrap.sh 
+36644692.844@jobsub02.fnal.gov        yuhw            09/07 12:14   0+01:42:30 H   0   3.2 port2-run1_intrinsic_nue_part1-v08_00_00_42.sh_20200907_121417_664310_0_1_wrap.sh 
+
+6 jobs; 0 completed, 0 removed, 0 idle, 1 running, 5 held, 0 suspended
+```
+
+
+
+### 2020-09-07
+
+Good reco cut:
+
+```bash
+nuvtx_diff<1 && showervtx_diff<1 && truth_isCC && abs(truth_nuPdg)==12 && truth_vtxInside
+```
+
+nu nc: line 140 of https://nusoft.fnal.gov/larsoft/doxsvn/html/MCNeutrino_8h_source.html#l00079
+
+```bash
+T_PFeval: truth_nuIntType != 1098  (“1098” means NC nu electron elastic scattering)
 ```
 
