@@ -15,6 +15,7 @@ void merge_tree(
     auto *T_BDTvars = (TTree*) dir->Get("T_BDTvars");
     auto *T_eval = (TTree*) dir->Get("T_eval");
     auto *T_KINEvars = (TTree*) dir->Get("T_KINEvars");
+    auto *T_PFeval = (TTree*) dir->Get("T_PFeval");
 
     auto *tf_out = TFile::Open(output, "recreate");
 
@@ -24,6 +25,10 @@ void merge_tree(
 
     // seems merging branches from different TTree's are not supported in ROOT
     // https://root-forum.cern.ch/t/how-to-merge-two-root-files-with-different-branches-togher/14260
+
+    // T_KINEvars
+    Float_t kine_reco_Enu;
+    T_KINEvars->SetBranchAddress("kine_reco_Enu",&kine_reco_Enu);
 
     // T_eval
     Bool_t match_isFC;
@@ -45,11 +50,12 @@ void merge_tree(
     T_eval->SetBranchAddress("weight_cv",&weight_cv);
     T_eval->SetBranchAddress("weight_lee",&weight_lee);
 
-    // T_KINEvars
-    Float_t kine_reco_Enu;
-    T_KINEvars->SetBranchAddress("kine_reco_Enu",&kine_reco_Enu);
+    // T_PFeval
+    Int_t truth_nuIntType;
+    T_PFeval->SetBranchAddress("truth_nuIntType",&truth_nuIntType);
 
     std::vector<TBranch*> brs;
+    brs.push_back(bdt->Branch("kine_reco_Enu", &kine_reco_Enu, "kine_reco_Enu/F"));
     Float_t match_isFC_f, truth_isCC_f, truth_vtxInside_f, truth_nuPdg_f;
     brs.push_back(bdt->Branch("match_isFC", &match_isFC_f, "match_isFC/F"));
     brs.push_back(bdt->Branch("truth_isCC", &truth_isCC_f, "truth_isCC/F"));
@@ -60,7 +66,8 @@ void merge_tree(
     brs.push_back(bdt->Branch("weight_spline", &weight_spline, "weight_spline/F"));
     brs.push_back(bdt->Branch("weight_cv", &weight_cv, "weight_cv/F"));
     brs.push_back(bdt->Branch("weight_lee", &weight_lee, "weight_lee/F"));
-    brs.push_back(bdt->Branch("kine_reco_Enu", &kine_reco_Enu, "kine_reco_Enu/F"));
+    Float_t truth_nuIntType_f;
+    brs.push_back(bdt->Branch("truth_nuIntType", &truth_nuIntType_f, "truth_nuIntType/F"));
 
     // 1st digit: run #
     // 2nd digit: 0: intrinsic nue, 1: intrinsic nue lowE, 2: bnb nu, 3: bnb nu lowE, 4: ext bnb, 5 dirt
@@ -71,10 +78,12 @@ void merge_tree(
     for(Long64_t ientry=0; ientry<bdt->GetEntries(); ++ientry) {
         T_eval->GetEntry(ientry);
         T_KINEvars->GetEntry(ientry);
+        T_PFeval->GetEntry(ientry);
         match_isFC_f = match_isFC;
         truth_isCC_f = truth_isCC;
         truth_vtxInside_f = truth_vtxInside;
         truth_nuPdg_f = truth_nuPdg;
+        truth_nuIntType_f = truth_nuIntType;
         for(auto br : brs) {
             br->Fill();
         }
