@@ -3,11 +3,13 @@
 
 location: `/uboone/app/users/yuhw/Portback_WCP/wcp_v00_14_04/bdt-0912`
 
-**Use the `bdt` `TTree` only**. The `T_BDTvars` tree is a by-product processing this file and should NOT be used.
+All samples were processed using `wcp_v00_14_04` except the `run1_ext_bnb_C1_gt10_wcp_v00_14_00_POT1.2E20.root`, which was processed using ``wcp_v00_14_00`
+
+**Use the `bdt` `TTree` only**. The `T_BDTvars` tree is a by-product producing this file and should NOT be used.
 
 A rough POT number was given for each root file in the name.
 
-Use **only even `run`** for training: `(run%2)==0`
+Use **only even `run`** for training: `(run%2)==0` (TODO: use `run` or `subrun`?)
 
 `event_type` indicates sample category
 
