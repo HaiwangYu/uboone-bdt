@@ -12,7 +12,7 @@ namespace bdt {
     {
         //std::map<std::string, std::vector<double> > fWeight;
         std::vector<std::string> fName;
-        std::vector<double> fWeight;
+        std::vector< std::vector<double> > fWeight;
     };
 }
 
@@ -100,7 +100,8 @@ void test_save_obj(
         truth_nuIntType_f = truth_nuIntType;
         //EventWeightMar18.fWeight["knob_name"] = {1., 1.};
         EventWeightMar18.fName = {"knob0", "knob1"};
-        EventWeightMar18.fWeight = {1., 2.};
+        EventWeightMar18.fWeight.push_back({0.1, 0.2});
+        EventWeightMar18.fWeight.push_back({1.1, 1.2});
         for(auto br : brs) {
             br->Fill();
         }
