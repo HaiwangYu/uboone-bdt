@@ -19,14 +19,14 @@
 check dataset summary
 
 ```bash
-samweb list-files --summary defname:prodgenie_bnb_intrinsic_nue_uboone_overlay_mcc9.0_run2_wcp_reco1.5_reco1.5_reco1.5
+samweb list-files --summary defname:prodgenie_bnb_intrinsic_nue_uboone_overlay_LowE_reco1.5_run3_reco1.5_reco1.5
 ```
 
 
 
 ```
 cd /uboone/app/users/yuhw/Portback_WCP/Samdata
-./samfilelist.sh 1 7456 prodgenie_bnb_intrinsic_nue_uboone_overlay_mcc9.0_run2_wcp_reco1.5_reco1.5_reco1.5
+./samfilelist.sh 1 581 prodgenie_bnb_intrinsic_nue_uboone_overlay_LowE_reco1.5_run3_reco1.5_reco1.5
 ```
 
 ### project.py
@@ -54,12 +54,6 @@ jobsub_fetchlog --jobid
 ### Analysis
 
 run_WCPcheckout.fcl
-
-```bash
-time lar -c run_WCPcheckout.fcl -S filelist.txt
-```
-
-
 
 ```bash
 SaveLeeWieghts: false
@@ -222,35 +216,5 @@ How to read off the POT information?
 Read 90889 lines from rslist.txt
            EXT         Gate2        E1DCNT        tor860        tor875   E1DCNT_wcut   tor860_wcut   tor875_wcut
     43608004.0    24784390.0    24890552.0     9.585e+19     9.608e+19    20187655.0     8.516e+19     8.536e+19
-```
-
-2020-09-15
-
-```bash
-$jobsub_q --user yuhw
-JOBSUBJOBID                           OWNER           SUBMITTED     RUN_TIME   ST PRI SIZE CMD
-36551838.1624@jobsub01.fnal.gov       yuhw            09/14 09:50   0+08:00:06 H   0   0.0 port2-data_bnb_run1_5e19_04-v08_00_00_42.sh_20200914_095041_3075715_0_1_wrap.sh 
-```
-
-2020-09-23
-
-```bash
-$jobsub_q --user yuhw
-JOBSUBJOBID                           OWNER           SUBMITTED     RUN_TIME   ST PRI SIZE CMD
-37157048.30@jobsub02.fnal.gov         yuhw            09/22 21:47   0+06:00:06 H   0   0.0 port2-run2_intrinsic_nue_part1-v08_00_00_42.sh_20200922_214721_328159_0_1_wrap.sh 
-37157048.921@jobsub02.fnal.gov        yuhw            09/22 21:47   0+06:00:08 H   0   0.0 port2-run2_intrinsic_nue_part1-v08_00_00_42.sh_20200922_214721_328159_0_1_wrap.sh 
-37157048.1228@jobsub02.fnal.gov       yuhw            09/22 21:47   0+00:30:50 H   0   2.7 port2-run2_intrinsic_nue_part1-v08_00_00_42.sh_20200922_214721_328159_0_1_wrap.sh 
-37157048.1293@jobsub02.fnal.gov       yuhw            09/22 21:47   0+01:35:43 H   0   3.2 port2-run2_intrinsic_nue_part1-v08_00_00_42.sh_20200922_214721_328159_0_1_wrap.sh 
-```
-
-```bash
-$jobsub_q --user yuhw
-JOBSUBJOBID                           OWNER           SUBMITTED     RUN_TIME   ST PRI SIZE CMD
-36924751.190@jobsub01.fnal.gov        yuhw            09/23 09:58   0+02:11:00 H   0   3.7 port2-run2_intrinsic_nue_part2-v08_00_00_42.sh_20200923_095837_2646008_0_1_wrap.sh 
-36924751.202@jobsub01.fnal.gov        yuhw            09/23 09:58   0+06:00:06 H   0   0.0 port2-run2_intrinsic_nue_part2-v08_00_00_42.sh_20200923_095837_2646008_0_1_wrap.sh 
-36924751.206@jobsub01.fnal.gov        yuhw            09/23 09:58   0+06:00:06 H   0   0.0 port2-run2_intrinsic_nue_part2-v08_00_00_42.sh_20200923_095837_2646008_0_1_wrap.sh 
-36924751.267@jobsub01.fnal.gov        yuhw            09/23 09:58   0+06:00:21 H   0   0.0 port2-run2_intrinsic_nue_part2-v08_00_00_42.sh_20200923_095837_2646008_0_1_wrap.sh 
-36924751.407@jobsub01.fnal.gov        yuhw            09/23 09:58   0+01:53:33 H   0   2.9 port2-run2_intrinsic_nue_part2-v08_00_00_42.sh_20200923_095837_2646008_0_1_wrap.sh 
-36924751.782@jobsub01.fnal.gov        yuhw            09/23 09:58   0+06:00:34 H   0   2.0 port2-run2_intrinsic_nue_part2-v08_00_00_42.sh_20200923_095837_2646008_0_1_wrap.sh
 ```
 
