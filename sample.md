@@ -9,7 +9,7 @@ All samples were processed using `wcp_v00_14_04` except the `run1_ext_bnb_C1_gt1
 
 A rough POT number was given for each root file in the name.
 
-Use **only even `run`** for training: `(run%2)==0` (TODO: use `run` or `subrun`?)
+Use **only even `subrun`** for training: `(subrun%2)==0`
 
 `event_type` indicates sample category
 
