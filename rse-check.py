@@ -13,7 +13,9 @@ if not T:
 rses = []
 for e in T:
   rse = (e.run, e.subrun, e.event)
+  #rse = (e.run, e.subrun)
   if rses.count(rse)==0:
     rses.append(rse)
   else:
-    print("Duplicated entry for run %d, subrun %d" %(rse[0], rse[1], rse[2]))
+    print("Duplicated entry for ", rse)
+print("unique rse: %d"%len(rses))
