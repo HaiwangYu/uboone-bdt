@@ -4,6 +4,10 @@ import sys
 import os
 import subprocess
 
+
+'''
+usage: ./batchGetDataInfo.py rslist.txt
+'''
 input = sys.argv[1]
 
 with open(input, 'r') as infile:
