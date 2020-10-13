@@ -26,8 +26,6 @@ else:
     query = "defname:{}".format(defname)
     files = subprocess.check_output(["samweb", "list-files", query]).split()
 
-print(files)
-
 potdb = open(outname,'w')
 header = "           run        subrun           EXT         Gate2        E1DCNT        tor860        tor875   E1DCNT_wcut   tor860_wcut   tor875_wcut"
 print(header, file=potdb)
