@@ -8,14 +8,25 @@ import json
 
 
 '''
-usage: ./batchGetDataInfo.py defname
+usage: ./batchGetDataInfo.py defname [file_list]
 '''
 
 defname = sys.argv[1]
 outname = '{}_potdb.txt'.format(defname)
 
-query = "defname:{}".format(defname)
-files = subprocess.check_output(["samweb", "list-files", query]).split()
+files = []
+if len(sys.argv) > 2 :
+    file_list = sys.argv[2]
+    outname = '{}_potdb.txt'.format(file_list)
+    with open(file_list, 'r') as infile:
+        data = infile.readlines()
+        for i,line in enumerate(data):
+            files.append(line.split()[0])
+else:
+    query = "defname:{}".format(defname)
+    files = subprocess.check_output(["samweb", "list-files", query]).split()
+
+print(files)
 
 potdb = open(outname,'w')
 header = "           run        subrun           EXT         Gate2        E1DCNT        tor860        tor875   E1DCNT_wcut   tor860_wcut   tor875_wcut"
@@ -27,7 +38,5 @@ for i,file in enumerate(files):
     for rs in meta["runs"]:
         potinfo = subprocess.check_output(["/uboone/app/users/zarko/getDataInfo.py", "--noheader", "-v2", "-r", str(rs[0]), "-s", str(rs[1])])
         print(potinfo, end='', file=potdb)
-    if i > 10:
-        break
 
 potdb.close()
